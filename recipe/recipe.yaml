@@ -20,7 +20,7 @@ requirements:
   host:
     - python ${{ python_min }}.*
     - pip
-    - flit<4
+    - flit <4
   run:
     - python >=${{ python_min }}
 
