@@ -1,0 +1,52 @@
+schema_version: 1
+
+context:
+  version: 0.2.0
+
+package:
+  name: backcall
+  version: ${{ version }}
+
+source:
+  url: https://files.pythonhosted.org/packages/source/b/backcall/backcall-${{ version }}.tar.gz
+  sha256: 5cbdbf27be5e7cfadb448baf0aa95508f91f2bbc6c6437cd9cd06e2a4c215e1e
+
+build:
+  number: 1
+  script: ${{ PYTHON }} -m pip install .
+  noarch: python
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - pip
+    - flit <4
+  run:
+    - python >=${{ python_min }}
+
+tests:
+  - python:
+      imports:
+        - backcall
+      pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - '*'
+
+about:
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: Specifications for callback functions passed in to an API
+  description: |
+    Backcall provides a way of specifying the parameters that callback functions
+    need to accept, and adapting callbacks that take fewer parameters, so you
+    can add parameters to your callback API without breaking code that doesn't
+    know about them.
+
+
+  homepage: https://github.com/takluyver/backcall/
+
+extra:
+  recipe-maintainers:
+    - takluyver
+    - jsmolic
